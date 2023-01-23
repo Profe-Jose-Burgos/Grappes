@@ -3,12 +3,12 @@
 
 #_LIB___________________
 import json, pickle, nltk, numpy as np
-from tensorflow.keras import Secuential
-from tensorflow.keras.layer import Conv2D, Flatten, Dense, Dropout
-from tensorflow.keras.optimizer import SGD, Adam
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Conv2D, Flatten, Dense, Dropout
+from tensorflow.keras.optimizers import SGD
 from nltk.stem import SnowballStemmer
 
-stemmer = Snowballstemer("spanish")
+stemmer = SnowballStemmer("spanish")
 ignored_words = ["?", "¿", "!", "¡", "[", "]", "{", "}", "(", ")", "+", "-", "*", "/"]
 json_data = open("intents.json").read()
 intents = json.loads(json_data)
@@ -58,24 +58,17 @@ def modelo(x, y):
     modelo.add(Dropput(0.5))
     modelo.add(Dense(len(y[0]), ativation="relu"))
     sgd = SGD(learning_rate=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-    #adam = Adam(learning_rate=0.01, decay=1e-6, momentum=0.9, nesterov=True) <------ try
-    try:
-        print("Utilizando Adam...")
-        modelo.compile(loss="categorical_crossentropy", optimizer=adam, metrics=["accuracy"])
-        data = modelo.fit(np.array(x), np.array(y), epochs=1000, batch_size=5, verbose=0)
-        modelo.save("Chatbot_modelo.h5", data)
-    except:
-        print("Utilizando SGD...")
-        modelo.compile(loss="categorical_crossentropy", optimizer=sgd, metrics=["accuracy"])
-        data = modelo.fit(np.array(x), np.array(y), epochs=1000, batch_size=5, verbose=0)
-        modelo.save("Chatbot_modelo.h5", data)
+    print("Utilizando SGD...")
+    modelo.compile(loss="categorical_crossentropy", optimizer=sgd, metrics=["accuracy"])
+    data = modelo.fit(np.array(x), np.array(y), epochs=1000, batch_size=5, verbose=0)
+    modelo.save("Chatbot_modelo.h5", data)
 
 def crear_modelo():
     palabras, clases, documentos = tokenizador()
-    palabras = lematizador(palabras, clases, documentos)
-    x, y = entrenamiento(palabras, clases, documentos)
+    palabras2 = lematizador(palabras, clases, documentos)
+    x, y = entrenamiento(palabras2, clases, documentos)
     modelo(x, y)
 
 
-
+crear_modelo()
     
