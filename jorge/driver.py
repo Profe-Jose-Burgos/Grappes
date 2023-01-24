@@ -18,7 +18,9 @@ if __name__ == '__main__':
     if not isfile("Chatbot_modelo.h5"):
         from crear_modelo import crear_modelo
         print("Creating model...")
-        sleep(1)
+        crear_modelo()
+        sleep(5)
+        
     from keep_session import start_keep_session
     print("Starting sesison...")
     start_keep_session()

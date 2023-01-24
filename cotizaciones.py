@@ -11,6 +11,11 @@ from email import encoders
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 
+#cuenta de email
+sender = 'grappes.sic@hotmail.com'
+password = 'GrappesSic123'
+
+
 #Pidiendo datos para la cotizacion
 company = input('Ingresa nombre de la empresa: ')
 name = input('Ingresa tu nombre: ')
@@ -19,34 +24,29 @@ quotation_number = rdm.randint(0,100)
 date = datetime.date.today()
 
 
-def pdf_generator():
-    #Creacion del Documento pdf
-    doc = canvas.Canvas("quotation%s.pdf"%date,pagesize=A4)
-    doc.setFont("Times-Roman", 12)
-    doc.setLineWidth(.2)
-
-    #Formando la plantilla
-    doc.drawString(30,750,'Cotizacion %s'%quotation_number)
-    doc.drawString(30,735,'Grappes INC')
-    doc.drawString(500,755,'%s'%date)
-    doc.line(378,723,580,723)
+#Creacion del Documento pdf
+doc = canvas.Canvas("quotation%s.pdf"%date,pagesize=A4)
+doc.setFont("Times-Roman", 12)
+doc.setLineWidth(.2)
+#Formando la plantilla
+doc.drawString(30,750,'Cotizacion %s'%quotation_number)
+doc.drawString(30,735,'Grappes INC')
+doc.drawString(500,755,'%s'%date)
+doc.line(378,723,580,723)
 ##################################
-    doc.drawString(275,725,'Estimado')
-    doc.drawString(400,725,name)
-    doc.line(378,723,580,723)
-
-    doc.drawString(30,703,'Empresa')
-    doc.line(120,700,580,700)
-    doc.drawString(120,703,'%s'%company)
-    doc.showPage()
-    doc.save()
+doc.drawString(275,725,'Estimado')
+doc.drawString(400,725,name)
+doc.line(378,723,580,723)
+doc.drawString(30,703,'Empresa')
+doc.line(120,700,580,700)
+doc.drawString(120,703,'%s'%company)
+doc.showPage()
+doc.save()
 
 
 try:
-#Creando el mensaje Email
+#Creando el mensaje Email 
     time.sleep(1)
-    sender = 'grappes.sic@hotmail.com'
-    password = 'GrappesSic123'
     addressee = email
     subject = 'Cotizacion_%s'%quotation_number
     body_message = 'Hola %s, \n\nGracias por solicitar una cotizacion con Grappes Shipping. Podras encontrar la cotizacion adjuntada en el correo.'%name
@@ -73,7 +73,9 @@ except:
 
 #Conexion con el servidor Microsoft
 sesion_smtp = smtplib.SMTP('smtp.office365.com',587)
+sesion_smtp.ehlo()
 sesion_smtp.starttls()
+sesion_smtp.ehlo()
 sesion_smtp.login(sender,password)
 text = menssage.as_string()
 sesion_smtp.sendmail(sender,addressee,text)

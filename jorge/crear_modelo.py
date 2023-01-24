@@ -5,7 +5,7 @@
 import json, pickle, nltk, numpy as np
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, Flatten, Dense, Dropout
-from tensorflow.keras.optimizers import SGD, Adam
+from tensorflow.keras.optimizers import SGD
 from nltk.stem import SnowballStemmer
 
 stemmer = SnowballStemmer("spanish")
@@ -47,9 +47,9 @@ def entrenamiento(palabras, clases, documentos):
         output_row =list(output_empty)
         output_row[clases.index(doc[1])] = 1
         entrenamiento.append([bolsa,output_row])
-    entrenamiento=np.array(entrenamiento) 
-    x= list(entrenamiento[:,0])
-    y= list(entrenamiento[:,1])  
+    entrenamiento1=np.array(entrenamiento) 
+    x= list(entrenamiento1[:,0])
+    y= list(entrenamiento1[:,1])  
     return x, y
 
 def modelo(x, y):
@@ -62,7 +62,7 @@ def modelo(x, y):
     sgd=SGD(learning_rate=0.01,decay=1e-6,momentum=0.9,nesterov=True) 
     print("Using sgd...")
     modelo.compile(loss="categorical_crossentropy",optimizer=sgd,metrics=["accuracy"])
-    hist=modelo.fit(np.array(x),np.array(y),epochs=300,batch_size=5,verbose=0)
+    hist=modelo.fit(np.array(x),np.array(y),epochs=600,batch_size=5,verbose=0)
     modelo.save("Chatbot_modelo.h5",hist)
     print("The model was created succesfuly...")
     
@@ -70,6 +70,4 @@ def crear_modelo():
     palabras, clases, documentos = tokenizador()
     palabras2 = lematizador(palabras, clases, documentos)
     x, y = entrenamiento(palabras2, clases, documentos)
-    modelo(x, y)
-
-    
+    modelo(x, y) 

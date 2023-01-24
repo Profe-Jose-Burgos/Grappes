@@ -1,3 +1,7 @@
+# Grappes: Chatbot
+# Whatsapp Bot
+
+#_LIB___________________
 import re
 from time import sleep
 from selenium import webdriver
@@ -115,4 +119,3 @@ def procesar_mensaje(message :str):
         chatbox.send_keys(response2, Keys.ENTER)
         sleep(0.5)
     webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
-
