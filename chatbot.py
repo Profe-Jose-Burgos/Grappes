@@ -45,13 +45,15 @@ def bow(sentences, palabras, show_details=True):
 def predict_class(sentences, modelo):
     p = bow(sentences,palabras,show_details=False)    
     res = modelo.predict(np.array([p]))[0]   
-    ERROR_THRESHOLD = 0.65   
+    ERROR_THRESHOLD = 0.75
     results = [[i,r] for i,r in enumerate(res) if r > ERROR_THRESHOLD] 
     results.sort(key = lambda x: x[1], reverse = True)  
     return_list = []    
     for r in results:   
         return_list.append({"intent": clases[r[0]], "probability": str(r[1])})
     print("accurracy:", return_list[0]["probability"])
+    if len(return_list) == 0:
+        return_list.append({"intent": "no_response", "probability": "1.00"})
     return return_list
 
 def get_response(ints, intents_json, text):

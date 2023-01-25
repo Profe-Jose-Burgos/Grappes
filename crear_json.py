@@ -22,7 +22,6 @@ def start_intents():
                     "como estas",
                     "hay alguien ahi?",
                     "hey",
-                    "ayuda",
                     "que tal",
                     "que sopa",
                     "habla",
@@ -31,11 +30,42 @@ def start_intents():
                     "q xopa"
                   ],
                   "responses": [
-                    "Hola has contactado con Grappe BOX (bot)\n1- Puedo ayudarte en hacer una cotización\n2- Puedo ayudarte a programar un envío\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente."
+                    "Hola has contactado con Grappe BOX (bot)\n1- Puedo ayudarte en hacer una cotización\n2- Puedo ayudarte a programar un envío\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente. \n5- Programar citas para asesorias."
                   ],
                   "context": [
                     "saludos"
                   ]
+                },
+                {
+                    "tag": "easter_egg",
+                    "patterns": [
+                        "cuentame tu secreto",
+                        "dime tu secreto",
+                        "tienes muchos secretos verdad",
+                        "Jorge Perdomo",
+                        "Jose Dasilva",
+                        "Sara Portillo",
+                        "Yaili Alvarado",
+                        "Jeferson Chacon",
+                        "sic",
+                        "Jose Burgos",
+                        "Luis Gutierrez"
+                    ],
+                    "responses": [
+                        "Asíque eres uno de los privilegiados que conoce esa informacion...",
+                        "Si conoces esas palabras mágicas, tal vez conozcas a uno de mis codificadores, Jorge Perdomo",
+                        "Si conoces esas palabras mágicas, tal vez conozcas a uno de mis programadores, Jose Dasilva",
+                        "Si conoces esas palabras mágicas, tal vez conozcas a uno de mis padres, Sara Portillo",
+                        "Si conoces esas palabras mágicas, tal vez conozcas a uno de mis estruturadores, Yaili Alvarado",
+                        "Si conoces esas palabras mágicas, tal vez conozcas a uno de mis diseñadores, Jeferson Chacon",
+                        "¡Como curiosidad estoy programado enteramente en Python!",
+                        "Soy un BOT creado para un curso de programación de Python e inteligencia artificial de Samsung, llamado SIC",
+                        "Saludos humano, soy Grappes BOT. \u00bfEn qu\u00e9 puedo servirte?\nTe recomiendoque me preguntes que puedo hacer",
+                        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                    ],
+                    "context": [
+                        "easter_egg"
+                    ]
                 },
                 {
                   "tag": "ayuda_realizar_cotizacion",
@@ -228,14 +258,17 @@ def start_intents():
                 {
                   "tag": "ayuda",
                   "patterns": [
+                    "Ayuda",
                     "ayuda",
+                    "ayudame",
+                    "Ayudame",
                     "help",
                     "necesito ayuda",
                     "ayuda por favor",
                     "ayuda porfavor"
                   ],
                   "responses": [
-                    "1- Puedo ayudarte en hacer una cotización\n2- Puedo ayudarte a programar un envío\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente.\n5- Programar citas para asesorias."
+                    "1- Puedo ayudarte en hacer una cotización\n2- Puedo ayudarte a programar un envío\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente. \n5- Programar citas para asesorias."
                   ],
                   "context": [
                     "ayuda"
@@ -316,12 +349,10 @@ def start_intents():
                     ""
                   ],
                   "responses": [
-                    "No te he logrando entender, intentalo de nuevo.",
-                    "\u00bfC\u00f3mo has dicho, disculpa?",
-                    "Lo siento, no entiendo lo que me pides...",
-                    "Repiteme, por favor",
-                    "Disculpe \u00bfQu\u00e9Qué ha dicho?",
-                    "Verifica el mensaje que has enviado"
+                    "No te he logrando entender, puedo ayudarte con las siguientes opciones:\nPara contactarte con un agente envía un mensaje con la siguiente información:\nAgente, Nombre, Numero de telefono\nEjemplo: *Agente, Pablo Andres, 12346789*",
+                    "\u00bfC\u00f3mo has dicho, disculpa? Puedes enviar *ayuda* para mis opciones disponibles.",
+                    "Lo siento, no entiendo lo que me pides.\npuedo ayudarte con las siguientes opciones:\nPara contactarte con un agente envía un mensaje con la siguiente información:\nAgente, Nombre, Numero de telefono\nEjemplo: *Agente, Pablo Andres, 12346789*",
+                    "Verifica el mensaje que has enviado,  Puedes enviar *ayuda* para mis opciones disponibles."
                   ],
                   "context": [
                     ""
