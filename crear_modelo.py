@@ -62,7 +62,7 @@ def modelo(x, y):
     sgd=SGD(learning_rate=0.01,decay=1e-6,momentum=0.9,nesterov=True) 
     print("Using sgd...")
     modelo.compile(loss="categorical_crossentropy",optimizer=sgd,metrics=["accuracy"])
-    hist=modelo.fit(np.array(x),np.array(y),epochs=600,batch_size=5,verbose=0)
+    hist=modelo.fit(np.array(x),np.array(y),epochs=800,batch_size=5,verbose=0)
     modelo.save("Chatbot_modelo.h5",hist)
     print("The model was created succesfuly...")
     

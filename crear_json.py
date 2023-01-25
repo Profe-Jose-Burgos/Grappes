@@ -119,20 +119,40 @@ def start_intents():
                   ]
                 },
                 {
-                  "tag": "ayuda_programar_envio",
-                  "patterns": [
-                    "nuevo envio",
-                    "2",
-                    "programar entrega",
-                    "entrega",
-                    "cita entrega""quiero enviar""quiero recibir"
-                  ],
-                  "responses": [
-                    "Para programar una entrega env\u00eda un mensaje con la siguiente informaci\u00f3n:\nEntrega, Nombre, contacto\nEjemplo: Entrega, Pablo Andres, 12346789"
-                  ],
-                  "context": [
-                    "ayuda_programar_envio"
-                  ]
+                    "tag": "ayuda_programar_envio",
+                    "patterns": [
+                        "nuevo envio",
+                        "2",
+                        "programar entrega",
+                        "entrega",
+                        "cita entrega"
+                        "quiero enviar"
+                        "quiero recibir"
+
+                    ],
+                    "responses": [ "Buenas, contamos con entregas de lunes a viernes,para programar una entrega env\u00eda un mensaje con la siguiente informaci\u00f3n:\nEntrega, Nombre, contacto, día\nEjemplo: Entrega, Pablo Andres, 12346789, día"
+                    ],
+                    "context": [
+                        "ayuda_programar_envio"
+                    ]
+                },
+                {
+                    "tag": "programar_envio",
+                    "patterns": [
+                        "entrega, ",
+                        "Entrega, ",
+                        "entrega, nombre apellido, xxxxxxxxx, xxxxx",
+                        "Entrega,nombre apellido,xxxxxxxxx, día",
+
+                    ],
+                    "responses": [
+                        "Desplegando menú de entrega",
+                        "Gracias por confiar en nosotros, creando entrega...",
+                        "De inmediato!"
+                    ],
+                    "context": [
+                        "programar_envio"
+                    ]
                 },
                 {
                   "tag": "programar_envio",
@@ -153,21 +173,38 @@ def start_intents():
                   ]
                 },
                 {
-                  "tag": "ayuda_asesoría",
-                  "patterns": [
-                    "cita asesoría",
-                    "asesoría",
-                    "cita ",
-                    "sucursal",
-                    "ir a oficina",
-                    "6"
-                  ],
-                  "responses": [
-                    "Para solicitar una cita env\u00eda un mensaje con la siguiente informaci\u00f3n:\ncita, Nombre, contacto, dia, hora \nEjemplo: cita, Pablo Andres , 67856989, lunes, 9"
-                  ],
-                  "context": [
-                    "ayuda_asesoría"
-                  ]
+                    "tag": "ayuda_asesoría",
+                    "patterns": [
+                        "cita asesoría",
+                        "asesoría",
+                        "cita ",
+                        "sucursal",
+                        "ir a oficina",
+                        "5"
+                    ],
+                    "responses": ["Buenas, contamos con citas de asesoría de lunes a viernes en los siguientes horarios: \n a. 7:00 am\nb.8:00 am\nc. 9:00 am\nd. 10:00 am\ne.11:00 am\npara solicitar una cita env\u00eda un mensaje con la siguiente informaci\u00f3n:\ncita, Nombre, contacto, día, hora seleccionada \nEjemplo: cita, Pablo Andres , 67856989 , lunes, a"
+                    ],
+                    "context": [
+                        "ayuda_asesoría"
+                    ]
+                },
+                {
+                    "tag": "cita_asesoría",
+                    "patterns": [
+                        "cita, ",
+                        "asesor,",
+                        "cita, nombre apellido, XXXXXXXX, xxxxx,x",
+                        "citas,nombre apellido, 67855599, lunes, b ",
+
+                    ],
+                    "responses": [
+                        "Entendido, desplegando el menú de citas de asesoría",
+                        "Sin problemas, deme un momento.",
+                        "¿Vas a visitarnos?, excelente!", 
+                    ],
+                    "context": [
+                        "contactar_agente"
+                    ]
                 },
                 {
                   "tag": "cita_asesoría",
@@ -193,10 +230,12 @@ def start_intents():
                   "patterns": [
                     "ayuda",
                     "help",
-                    "necesito ayuda"
+                    "necesito ayuda",
+                    "ayuda por favor",
+                    "ayuda porfavor"
                   ],
                   "responses": [
-                    "1- Puedo ayudarte en hacer una cotización\n2- Puedo ayudarte a programar un envío\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente."
+                    "1- Puedo ayudarte en hacer una cotización\n2- Puedo ayudarte a programar un envío\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente.\n5- Programar citas para asesorias."
                   ],
                   "context": [
                     "ayuda"

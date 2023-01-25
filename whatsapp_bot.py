@@ -84,7 +84,8 @@ def buscar_chats():
         chats = driver.find_elements(By.CLASS_NAME,"_1Oe6M")
         for chat in chats:
             porresponder = checkMensajes(chat) 
-            if porresponder:                          
+            if porresponder:
+                sleep(0.5)
                 chat.click()
                 sleep(0.5)
                 return True
@@ -112,10 +113,10 @@ def procesar_mensaje(message :str):
     response1, response2 = preparar_respuesta(message)
     sleep(1)
     chatbox.send_keys(response1, Keys.ENTER)
-    sleep(0.5)
+    sleep(1)
     if not response2 == 0:
         chatbox = driver.find_element(By.XPATH,'//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p')
         sleep(1)
         chatbox.send_keys(response2, Keys.ENTER)
-        sleep(0.5)
+        sleep(1)
     webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()

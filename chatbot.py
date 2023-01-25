@@ -6,7 +6,7 @@ import nltk, json, pickle, random, webbrowser as wb, numpy as np
 import openpyxl, string, secrets, smtplib, datetime, pandas as pd
 from nltk.stem import SnowballStemmer
 from tensorflow.keras.models import load_model
-from time import sleep
+import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -22,6 +22,7 @@ clases = pickle.load(open("clases.pkl", "rb"))
 letters = string.ascii_letters
 digits = string.digits
 alphabet = letters + digits
+
 
 #cuenta de email
 sender = 'grappes.sic@hotmail.com'
@@ -56,10 +57,18 @@ def predict_class(sentences, modelo):
 def get_response(ints, intents_json, text):
     tag = ints[0]["intent"]
     list_of_intents = intents_json["intents"]
-    for i  in list_of_intents: 
-        if (i["tag"] == tag):
-            result = random.choice(i["responses"])
-            break        
+    try:
+        for i  in list_of_intents: 
+            if (i["tag"] == tag):
+                result = random.choice(i["responses"])
+                break
+    except:
+        tag = "ayuda"
+        for i  in list_of_intents: 
+            if (i["tag"] == tag):
+                result = random.choice(i["responses"])
+                break
+            
     if(tag == "contactar_agente"):
         try:
             datos = text.split(",")
@@ -243,12 +252,10 @@ def create_cotizacion(company, name, email):
         text = menssage.as_string()
         sesion_smtp.sendmail(sender,addressee,text)
         sesion_smtp.quit()
-        
         return "¡El correo con la cotización fue enviado correctamente!"
-
     except:
         return "Lo sentimos no pudimos realizar el envío del correo. Intente nuevamente."
-        
+     
 def buscar_status(x):
     for index, row in grappes_tracking.iterrows():
         if x in grappes_tracking.index:
@@ -256,7 +263,34 @@ def buscar_status(x):
             status = grappes_tracking["Estado"][x]
             email = grappes_tracking["Correo"][x]
             return name, status, email
-            
+
+def open_csv(file):
+    track = pd.read_csv(file, sep=";")
+    return track
+
+
+file = "Grappes.csv"
+df = open_csv(file)
+
+# Variables para acceder a la db
+num_track = df["NumTracking"]
+name = df["Nombre"]
+user = df["Usuario"]
+tel = df["Teléfono"]
+correo = df["Correo"]
+status = df["Estado"]
+data = {"NumTracking": num_track, "Nombre": name, "Usuario": user,
+        "Teléfono": tel, "Correo": correo, "Estado": status}
+
+# se crea un DataFrame
+grappes_tracking = pd.DataFrame(data)
+grappes_tracking.set_index("NumTracking", inplace=True)
+# grappes_tracking
+
+# Buscamos los datos en la db
+
+
+           
 def check_tracking(num):
     # Le consultamos al cliente su numero de orden para verificar su estatus en la db
     num_order = list(num)

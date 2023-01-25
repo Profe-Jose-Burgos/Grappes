@@ -116,10 +116,27 @@
                 "cita entregaquiero enviarquiero recibir"
             ],
             "responses": [
-                "Para programar una entrega env\u00eda un mensaje con la siguiente informaci\u00f3n:\nEntrega, Nombre, contacto\nEjemplo: Entrega, Pablo Andres, 12346789"
+                "Buenas, contamos con entregas de lunes a viernes,para programar una entrega env\u00eda un mensaje con la siguiente informaci\u00f3n:\nEntrega, Nombre, contacto, d\u00eda\nEjemplo: Entrega, Pablo Andres, 12346789, d\u00eda"
             ],
             "context": [
                 "ayuda_programar_envio"
+            ]
+        },
+        {
+            "tag": "programar_envio",
+            "patterns": [
+                "entrega, ",
+                "Entrega, ",
+                "entrega, nombre apellido, xxxxxxxxx, xxxxx",
+                "Entrega,nombre apellido,xxxxxxxxx, d\u00eda"
+            ],
+            "responses": [
+                "Desplegando men\u00fa de entrega",
+                "Gracias por confiar en nosotros, creando entrega...",
+                "De inmediato!"
+            ],
+            "context": [
+                "programar_envio"
             ]
         },
         {
@@ -147,13 +164,30 @@
                 "cita ",
                 "sucursal",
                 "ir a oficina",
-                "6"
+                "5"
             ],
             "responses": [
-                "Para solicitar una cita env\u00eda un mensaje con la siguiente informaci\u00f3n:\ncita, Nombre, contacto, dia, hora \nEjemplo: cita, Pablo Andres , 67856989, lunes, 9"
+                "Buenas, contamos con citas de asesor\u00eda de lunes a viernes en los siguientes horarios: \n a. 7:00 am\nb.8:00 am\nc. 9:00 am\nd. 10:00 am\ne.11:00 am\npara solicitar una cita env\u00eda un mensaje con la siguiente informaci\u00f3n:\ncita, Nombre, contacto, d\u00eda, hora seleccionada \nEjemplo: cita, Pablo Andres , 67856989 , lunes, a"
             ],
             "context": [
                 "ayuda_asesor\u00eda"
+            ]
+        },
+        {
+            "tag": "cita_asesor\u00eda",
+            "patterns": [
+                "cita, ",
+                "asesor,",
+                "cita, nombre apellido, XXXXXXXX, xxxxx,x",
+                "citas,nombre apellido, 67855599, lunes, b "
+            ],
+            "responses": [
+                "Entendido, desplegando el men\u00fa de citas de asesor\u00eda",
+                "Sin problemas, deme un momento.",
+                "\u00bfVas a visitarnos?, excelente!"
+            ],
+            "context": [
+                "contactar_agente"
             ]
         },
         {
@@ -178,10 +212,12 @@
             "patterns": [
                 "ayuda",
                 "help",
-                "necesito ayuda"
+                "necesito ayuda",
+                "ayuda por favor",
+                "ayuda porfavor"
             ],
             "responses": [
-                "1- Puedo ayudarte en hacer una cotizaci\u00f3n\n2- Puedo ayudarte a programar un env\u00edo\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente."
+                "1- Puedo ayudarte en hacer una cotizaci\u00f3n\n2- Puedo ayudarte a programar un env\u00edo\n3- Tambien puedo ayudarte con el tracking del paquete\n4- Puedo enlazarte con un agente.\n5- Programar citas para asesorias."
             ],
             "context": [
                 "ayuda"
